@@ -12,7 +12,10 @@
 
 #ifdef MBEDTLS_PSA_CRYPTO_EXTERNAL_RNG
 /* This function is stubbed as no source of randomness is required
- * by APIs used in the BLx stages. Nevertheless, a hardware driver
+ * by APIs used in the BLx stages, with one exception: tf-psa-crypto
+ * uses it for RSA blinding during private key operations when BL2
+ * decrypts encrypted firmware images with RSA-OAEP (i.e. when
+ * MCUBOOT_ENC_IMAGES=y and MCUBOOT_ENCRYPT_RSA=y). A hardware driver
  * for a TRNG might override this implementation with a valid one,
  * hence mark it as weak. This stub sets output_length to zero.
  */
